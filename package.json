@@ -1,0 +1,29 @@
+{
+  "name": "red-project",
+  "description": "A Node-RED Project",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "@flowfuse/node-red-dashboard": "~1.11.1",
+    "node-red-contrib-buffer-parser": "~3.2.2",
+    "node-red-contrib-influxdb": "~0.7.0",
+    "node-red-contrib-modbus": "~5.31.0",
+    "node-red-contrib-os": "~0.2.1",
+    "node-red-contrib-stackhero-influxdb-v2": "~1.0.4",
+    "node-red-dashboard": "~3.6.5",
+    "node-red-node-email": "~2.2.1",
+    "node-red-node-ping": "~0.3.3",
+    "node-red-node-serialport": "~2.0.2"
+  },
+  "main": "settings.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
