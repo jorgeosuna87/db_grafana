@@ -18,9 +18,72 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 1,
   "links": [],
   "panels": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "ddofl86hx5eyob"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 40000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2a68fa",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 5,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "text"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "ddofl86hx5eyob"
+          },
+          "query": "from(bucket: \"sensores\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ParametrosProceso\")\n  |> filter(fn: (r) => r[\"_field\"] == \"nivel_litros\")\n  |> filter(fn: (r) => r[\"equipo_id\"] == \"FA-02A\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Volumen FA-02A",
+      "type": "bargauge"
+    },
     {
       "datasource": {
         "type": "influxdb",
@@ -36,7 +99,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               }
             ]
           },
@@ -47,7 +111,7 @@
       "gridPos": {
         "h": 4,
         "w": 5,
-        "x": 0,
+        "x": 5,
         "y": 0
       },
       "id": 5,
@@ -67,7 +131,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "10.4.3",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -91,6 +155,7 @@
           "color": {
             "mode": "thresholds"
           },
+          "decimals": 0,
           "mappings": [],
           "max": 40000,
           "min": 0,
@@ -98,17 +163,19 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "#2a68fa"
+                "color": "#2a68fa",
+                "value": null
               }
             ]
-          }
+          },
+          "unit": "litre"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 10,
         "w": 5,
-        "x": 5,
+        "x": 10,
         "y": 0
       },
       "id": 2,
@@ -130,7 +197,7 @@
         "sizing": "auto",
         "valueMode": "text"
       },
-      "pluginVersion": "10.4.3",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -155,76 +222,14 @@
             "mode": "thresholds"
           },
           "mappings": [],
-          "max": 40000,
+          "max": 93000,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "#2a68fa"
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 10,
-        "w": 5,
-        "x": 10,
-        "y": 0
-      },
-      "id": 3,
-      "options": {
-        "displayMode": "lcd",
-        "maxVizHeight": 300,
-        "minVizHeight": 16,
-        "minVizWidth": 8,
-        "namePlacement": "auto",
-        "orientation": "vertical",
-        "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true,
-        "sizing": "auto",
-        "valueMode": "text"
-      },
-      "pluginVersion": "10.4.3",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "ddofl86hx5eyob"
-          },
-          "query": "from(bucket: \"sensores\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ParametrosProceso\")\n  |> filter(fn: (r) => r[\"_field\"] == \"nivel_litros\")\n  |> filter(fn: (r) => r[\"equipo_id\"] == \"FA-06A\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
-          "refId": "A"
-        }
-      ],
-      "title": "Volumen FA-06A",
-      "type": "bargauge"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "ddofl86hx5eyob"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "max": 40000,
-          "min": 0,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "#2a68fa"
+                "color": "#2a68fa",
+                "value": null
               }
             ]
           }
@@ -237,7 +242,7 @@
         "x": 15,
         "y": 0
       },
-      "id": 4,
+      "id": 7,
       "options": {
         "displayMode": "lcd",
         "maxVizHeight": 300,
@@ -256,7 +261,7 @@
         "sizing": "auto",
         "valueMode": "text"
       },
-      "pluginVersion": "10.4.3",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
@@ -317,7 +322,8 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "red"
+                "color": "red",
+                "value": null
               }
             ]
           },
@@ -328,7 +334,7 @@
       "gridPos": {
         "h": 4,
         "w": 5,
-        "x": 0,
+        "x": 5,
         "y": 4
       },
       "id": 6,
@@ -340,6 +346,7 @@
           "showLegend": false
         },
         "tooltip": {
+          "maxHeight": 600,
           "mode": "single",
           "sort": "none"
         }
@@ -369,13 +376,14 @@
             "mode": "thresholds"
           },
           "mappings": [],
-          "max": 40000,
+          "max": 113000,
           "min": 0,
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
-                "color": "#2a68fa"
+                "color": "#2a68fa",
+                "value": null
               }
             ]
           }
@@ -385,10 +393,10 @@
       "gridPos": {
         "h": 10,
         "w": 5,
-        "x": 10,
+        "x": 0,
         "y": 10
       },
-      "id": 1,
+      "id": 8,
       "options": {
         "displayMode": "lcd",
         "maxVizHeight": 300,
@@ -407,35 +415,164 @@
         "sizing": "auto",
         "valueMode": "text"
       },
-      "pluginVersion": "10.4.3",
+      "pluginVersion": "11.0.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
             "uid": "ddofl86hx5eyob"
           },
-          "query": "from(bucket: \"sensores\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ParametrosProceso\")\n  |> filter(fn: (r) => r[\"_field\"] == \"nivel_litros\")\n  |> filter(fn: (r) => r[\"equipo_id\"] == \"FA-02A\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
+          "query": "from(bucket: \"sensores\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ParametrosProceso\")\n  |> filter(fn: (r) => r[\"_field\"] == \"nivel_litros\")\n  |> filter(fn: (r) => r[\"equipo_id\"] == \"FA-01\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
           "refId": "A"
         }
       ],
-      "title": "Volumen FA-02A",
+      "title": "Volumen FA-01",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "ddofl86hx5eyob"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 40000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2a68fa",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 5,
+        "x": 10,
+        "y": 10
+      },
+      "id": 3,
+      "options": {
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "text"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "ddofl86hx5eyob"
+          },
+          "query": "from(bucket: \"sensores\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ParametrosProceso\")\n  |> filter(fn: (r) => r[\"_field\"] == \"nivel_litros\")\n  |> filter(fn: (r) => r[\"equipo_id\"] == \"FA-06A\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Volumen FA-06A",
+      "type": "bargauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "ddofl86hx5eyob"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "max": 19000,
+          "min": 0,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "#2a68fa",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 5,
+        "x": 15,
+        "y": 10
+      },
+      "id": 4,
+      "options": {
+        "displayMode": "lcd",
+        "maxVizHeight": 300,
+        "minVizHeight": 16,
+        "minVizWidth": 8,
+        "namePlacement": "auto",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showUnfilled": true,
+        "sizing": "auto",
+        "valueMode": "text"
+      },
+      "pluginVersion": "11.0.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "ddofl86hx5eyob"
+          },
+          "query": "from(bucket: \"sensores\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"ParametrosProceso\")\n  |> filter(fn: (r) => r[\"_field\"] == \"nivel_litros\")\n  |> filter(fn: (r) => r[\"equipo_id\"] == \"FA-09\")\n  |> aggregateWindow(every: v.windowPeriod, fn: mean, createEmpty: false)\n  |> yield(name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "Volumen FA-09",
       "type": "bargauge"
     }
   ],
-  "refresh": "5s",
+  "refresh": "auto",
   "schemaVersion": 39,
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "2024-06-11T02:30:06.700Z",
-    "to": "2024-06-11T10:30:06.700Z"
+    "from": "now-5m",
+    "to": "now"
   },
+  "timeRangeUpdatedDuringEditOrView": false,
   "timepicker": {},
   "timezone": "browser",
   "title": "Volumen FA-02A",
   "uid": "fdofnne308w00a",
-  "version": 6,
+  "version": 7,
   "weekStart": ""
 }
